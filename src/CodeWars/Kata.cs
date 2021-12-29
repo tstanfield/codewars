@@ -5,18 +5,16 @@ using System.Text;
 
 namespace CodeWars
 {
-    public class Kata
+    public class RomanNumerals
     {
-        public static long FindNextSquare(long num)
+        public static string ToRoman(int n)
         {
-            double sqrt = Math.Sqrt(num);
+            return "";
+        }
 
-            if (sqrt % 1 > 0)
-            {
-                return -1;
-            }
-
-            return (long)Math.Pow(sqrt + 1, 2);
+        public static int FromRoman(string romanNumeral)
+        {
+            return 0;
         }
     }
 }

@@ -6,18 +6,46 @@ using NUnit.Framework;
 
 namespace CodeWars
 {
+
     [TestFixture]
-    public class KataTests
+    public class SolutionTest
     {
-        [Test]
-        [TestCase(155, ExpectedResult = -1)]
-        [TestCase(121, ExpectedResult = 144)]
-        [TestCase(625, ExpectedResult = 676)]
-        [TestCase(319225, ExpectedResult = 320356)]
-        [TestCase(15241383936, ExpectedResult = 15241630849)]
-        public static long FixedTest(long num)
+        [TestCase(1, "I")]
+        [TestCase(2, "II")]
+        [TestCase(4, "IV")]
+        [TestCase(5, "V")]
+        [TestCase(10, "X")]
+        [TestCase(50, "L")]
+        [TestCase(100, "C")]
+        [TestCase(500, "D")]
+        [TestCase(1000, "M")]
+        [TestCase(1990, "MCMXC")]
+        [TestCase(2008, "MMVIII")]
+        [TestCase(1666, "MDCLXVI")]
+        public void TestToRoman(int input, string expected)
+        {                     
+            string actual = RomanNumerals.ToRoman(input);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase("I", 1)]
+        [TestCase("II", 2)]
+        [TestCase("IV", 4)]
+        [TestCase("V", 5)]
+        [TestCase("X", 10)]
+        [TestCase("L", 50)]
+        [TestCase("C", 100)]
+        [TestCase("D", 500)]
+        [TestCase("M", 1000)]
+        [TestCase("MCMXC", 1990)]
+        [TestCase("MMVIII", 2008)]
+        [TestCase("MDCLXVI", 1666)]
+        public void TestFromRoman(string input, int expected)
         {
-            return Kata.FindNextSquare(num);
+            int actual = RomanNumerals.FromRoman(input);
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }
