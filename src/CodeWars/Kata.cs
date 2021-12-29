@@ -7,16 +7,39 @@ namespace CodeWars
 {
     public class Kata
     {
-        public static long FindNextSquare(long num)
+        public static string ToCamelCase(string str)
         {
-            double sqrt = Math.Sqrt(num);
+            var split = str.Split('-', '_');
 
-            if (sqrt % 1 > 0)
+            var result = string.Empty;
+
+            int wordCount = 0;
+
+            foreach(var word in split)
             {
-                return -1;
+                for(int i = 0; i < word.Length; i++)
+                {
+                    if(wordCount == 0 && i == 0)
+                    {
+                        //for first word, first char stays as-is
+                        result = word[i].ToString();
+                    }
+                    else if(i == 0)
+                    {
+                        //for all other words, the first letter gets cap
+                        result += word[i].ToString().ToUpper();
+                    }
+                    else
+                    {
+                        //for all other letters, go lower case
+                        result += word[i].ToString().ToLower();
+                    }
+                }
+
+                wordCount += 1;                
             }
 
-            return (long)Math.Pow(sqrt + 1, 2);
+            return result;
         }
     }
 }

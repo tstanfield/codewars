@@ -1,23 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
+using CodeWars;
 using NUnit.Framework;
 
-
-namespace CodeWars
+[TestFixture]
+public class KataTest
 {
-    [TestFixture]
-    public class KataTests
+    [Test]
+    public void KataTests()
     {
-        [Test]
-        [TestCase(155, ExpectedResult = -1)]
-        [TestCase(121, ExpectedResult = 144)]
-        [TestCase(625, ExpectedResult = 676)]
-        [TestCase(319225, ExpectedResult = 320356)]
-        [TestCase(15241383936, ExpectedResult = 15241630849)]
-        public static long FixedTest(long num)
-        {
-            return Kata.FindNextSquare(num);
-        }
+        Assert.AreEqual("theStealthWarrior", Kata.ToCamelCase("the_stealth_warrior"), "Kata.ToCamelCase('the_stealth_warrior') did not return correct value");
+        Assert.AreEqual("TheStealthWarrior", Kata.ToCamelCase("The-Stealth-Warrior"), "Kata.ToCamelCase('The-Stealth-Warrior') did not return correct value");
     }
 }
