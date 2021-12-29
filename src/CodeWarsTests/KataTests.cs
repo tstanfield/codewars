@@ -10,14 +10,13 @@ namespace CodeWars
     public class KataTests
     {
         [Test]
-        [TestCase(155, ExpectedResult = -1)]
-        [TestCase(121, ExpectedResult = 144)]
-        [TestCase(625, ExpectedResult = 676)]
-        [TestCase(319225, ExpectedResult = 320356)]
-        [TestCase(15241383936, ExpectedResult = 15241630849)]
-        public static long FixedTest(long num)
+        public void FixedTest()
         {
-            return Kata.FindNextSquare(num);
+            Assert.That(Kata.Lcm(new List<int> { }), Is.EqualTo(1));            
+            Assert.That(Kata.Lcm(new List<int> { 1071, 462 }), Is.EqualTo(23562));
+            Assert.That(Kata.Lcm(new List<int> { 2, 5 }), Is.EqualTo(10));
+            Assert.That(Kata.Lcm(new List<int> { 2, 3, 4 }), Is.EqualTo(12));
+            Assert.That(Kata.Lcm(new List<int> { 9 }), Is.EqualTo(9));
         }
     }
 }
