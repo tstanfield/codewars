@@ -7,16 +7,30 @@ namespace CodeWars
 {
     public class Kata
     {
-        public static long FindNextSquare(long num)
+        public static int DuplicateCount(string str)
         {
-            double sqrt = Math.Sqrt(num);
+            var duplicateCharacters = new Dictionary<char, int>();
 
-            if (sqrt % 1 > 0)
-            {
-                return -1;
+            str = str.ToLowerInvariant();
+
+            foreach(char c in str)
+            {                
+                if(duplicateCharacters.ContainsKey(c))
+                {
+                    duplicateCharacters[c] += 1;
+                }
+                else
+                {
+                    duplicateCharacters.Add(c, 0);
+                }
             }
 
-            return (long)Math.Pow(sqrt + 1, 2);
+            if(duplicateCharacters.Count == 0)
+            {
+                return 0;
+            }
+
+            return duplicateCharacters.Count(_ => _.Value > 0);
         }
     }
 }

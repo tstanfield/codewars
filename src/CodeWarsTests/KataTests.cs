@@ -10,14 +10,14 @@ namespace CodeWars
     public class KataTests
     {
         [Test]
-        [TestCase(155, ExpectedResult = -1)]
-        [TestCase(121, ExpectedResult = 144)]
-        [TestCase(625, ExpectedResult = 676)]
-        [TestCase(319225, ExpectedResult = 320356)]
-        [TestCase(15241383936, ExpectedResult = 15241630849)]
-        public static long FixedTest(long num)
+        public void KataTest()
         {
-            return Kata.FindNextSquare(num);
+            Assert.AreEqual(0, Kata.DuplicateCount(""));
+            Assert.AreEqual(0, Kata.DuplicateCount("abcde"));
+            Assert.AreEqual(2, Kata.DuplicateCount("aabbcde"));
+            Assert.AreEqual(2, Kata.DuplicateCount("aabBcde"), "should ignore case");
+            Assert.AreEqual(1, Kata.DuplicateCount("Indivisibility"));
+            Assert.AreEqual(2, Kata.DuplicateCount("Indivisibilities"), "characters may not be adjacent");
         }
     }
 }
