@@ -7,17 +7,16 @@ using NUnit.Framework;
 namespace CodeWars
 {
     [TestFixture]
-    public class KataTests
+    public class SolutionTest
     {
-        [Test]
-        [TestCase(155, ExpectedResult = -1)]
-        [TestCase(121, ExpectedResult = 144)]
-        [TestCase(625, ExpectedResult = 676)]
-        [TestCase(319225, ExpectedResult = 320356)]
-        [TestCase(15241383936, ExpectedResult = 15241630849)]
-        public static long FixedTest(long num)
+        [Test, Description("It should return correct text")]
+        public void SampleTest()
         {
-            return Kata.FindNextSquare(num);
+            Assert.AreEqual("no one likes this", Kata.Likes(new string[0]));
+            Assert.AreEqual("Peter likes this", Kata.Likes(new string[] { "Peter" }));
+            Assert.AreEqual("Jacob and Alex like this", Kata.Likes(new string[] { "Jacob", "Alex" }));
+            Assert.AreEqual("Max, John and Mark like this", Kata.Likes(new string[] { "Max", "John", "Mark" }));
+            Assert.AreEqual("Alex, Jacob and 2 others like this", Kata.Likes(new string[] { "Alex", "Jacob", "Mark", "Max" }));
         }
     }
 }
