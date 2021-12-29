@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace CodeWars
 {
     [TestFixture]
-    public class Tests
+    public class KataTests
     {
         [Test]
         [TestCase(155, ExpectedResult = -1)]
