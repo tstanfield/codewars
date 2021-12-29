@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
@@ -9,15 +10,56 @@ namespace CodeWars
     [TestFixture]
     public class KataTests
     {
-        [Test]
-        [TestCase(155, ExpectedResult = -1)]
-        [TestCase(121, ExpectedResult = 144)]
-        [TestCase(625, ExpectedResult = 676)]
-        [TestCase(319225, ExpectedResult = 320356)]
-        [TestCase(15241383936, ExpectedResult = 15241630849)]
-        public static long FixedTest(long num)
+        private static string[] msg =
         {
-            return Kata.FindNextSquare(num);
+        "should support finding peaks",
+        "should support finding peaks, but should ignore peaks on the edge of the array",
+        "should support finding peaks; if the peak is a plateau, it should only return the position of the first element of the plateau",
+        "should support finding peaks; if the peak is a plateau, it should only return the position of the first element of the plateau",
+        "should support finding peaks, but should ignore peaks on the edge of the array"
+    };
+
+        private static int[][] array =
+        {
+        new int[]{1,2,3,6,4,1,2,3,2,1},
+        new int[]{3,2,3,6,4,1,2,3,2,1,2,3},
+        new int[]{3,2,3,6,4,1,2,3,2,1,2,2,2,1},
+        new int[]{2,1,3,1,2,2,2,2,1},
+        new int[]{2,1,3,1,2,2,2,2}
+    };
+
+        private static int[][] posS =
+        {
+        new int[]{3,7},
+        new int[]{3,7},
+        new int[]{3,7,10},
+        new int[]{2,4},
+        new int[]{2}
+    };
+
+        private static int[][] peaksS =
+        {
+        new int[]{6,3},
+        new int[]{6,3},
+        new int[]{6,3,2},
+        new int[]{3,2},
+        new int[]{3}
+    };
+
+        [Test]
+        public void SampleTests()
+        {
+            for (int n = 0; n < msg.Length; n++)
+            {
+                int[] p1 = posS[n], p2 = peaksS[n];
+                var expected = new Dictionary<string, List<int>>()
+                {
+                    ["pos"] = p1.ToList(),
+                    ["peaks"] = p2.ToList()
+                };
+                var actual = PickPeaks.GetPeaks(array[n]);
+                Assert.AreEqual(expected, actual, msg[n]);
+            }
         }
     }
 }
