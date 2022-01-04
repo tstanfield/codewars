@@ -9,50 +9,38 @@ namespace CodeWars
     {
         public static string Mix(string s1, string s2)
         {
-            var result = string.Empty;
-
-            var q = GetChars(s1, 1)
+            var result = GetChars(s1, 1)
                 .Concat(GetChars(s2, 2))
                 .GroupBy(
                     freq => freq,
                     (key, values) =>
                         new Tuple<char, int, int>(key.Item1, key.Item2, values.Count())
                     )
-                .Where(_ => _.Item3 > 1);
-
-            var qq = q.GroupBy(
-                s => s.Item1,
-                (key, values) => new
+                .Where(_ => _.Item3 > 1)
+                .GroupBy(
+                    s => s.Item1,
+                    (key, values) => new
                     {
                         Key = key,
                         Values = values,
                         Prefix = GetPrefix(values)
                     }
-                )
+                    )
                 .OrderByDescending(_ => _.Values.Max(__ => __.Item3))
                 .ThenBy(_ => _.Prefix == "=" ? "999" : _.Prefix)
                 .ThenBy(_ => _.Key)
+                .Select(_ => _.Prefix + ":" + new string(_.Key, _.Values.Max(__ => __.Item3)))
                 ;
 
-            foreach(var x in qq)
-            {
-                if (result != string.Empty)
-                {
-                    result += "/";
-                }
-
-                result += x.Prefix + ":" + new string(x.Key, x.Values.Max(_ => _.Item3));
-            }
-
-            return result;
+            return string.Join('/', result);            
         }
 
         private static string GetPrefix(IEnumerable<Tuple<char, int, int>> items)
         {
-            var g = items.OrderByDescending(_ => _.Item3);
+            var sortedItems = items.OrderByDescending(_ => _.Item3);
 
-            var first = g.First();
-            var last = g.Last();
+            var first = sortedItems.First();
+            var last = sortedItems.Last();
             
             if(items.Count() == 2 && first.Item3 == last.Item3)
             {
