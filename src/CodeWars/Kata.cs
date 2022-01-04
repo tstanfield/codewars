@@ -7,16 +7,27 @@ namespace CodeWars
 {
     public class Kata
     {
-        public static long FindNextSquare(long num)
+        public static string PigIt(string str)
         {
-            double sqrt = Math.Sqrt(num);
+            var result = str
+                .Split(" ")
+                .Select(_ => ToPigLatin(_));
 
-            if (sqrt % 1 > 0)
+            return string.Join(' ', result);
+        }
+
+        private static string ToPigLatin(string s)
+        {
+            if(!s.All(_ => char.IsLetter(_)))
             {
-                return -1;
+                return s;
             }
 
-            return (long)Math.Pow(sqrt + 1, 2);
+            var firstLetter = s.First();
+
+            var secondPart = string.Concat(s.Skip(1).Take(s.Length - 1));
+
+            return string.Concat(secondPart, firstLetter, "ay");
         }
     }
 }

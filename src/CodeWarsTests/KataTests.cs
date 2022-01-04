@@ -10,14 +10,11 @@ namespace CodeWars
     public class KataTests
     {
         [Test]
-        [TestCase(155, ExpectedResult = -1)]
-        [TestCase(121, ExpectedResult = 144)]
-        [TestCase(625, ExpectedResult = 676)]
-        [TestCase(319225, ExpectedResult = 320356)]
-        [TestCase(15241383936, ExpectedResult = 15241630849)]
-        public static long FixedTest(long num)
+        public void KataTest()
         {
-            return Kata.FindNextSquare(num);
+            Assert.AreEqual("igPay atinlay siay oolcay", Kata.PigIt("Pig latin is cool"));
+            Assert.AreEqual("hisTay siay ymay tringsay", Kata.PigIt("This is my string"));
+            Assert.AreEqual("elloHay orldway !", Kata.PigIt("Hello world !"));
         }
     }
 }
