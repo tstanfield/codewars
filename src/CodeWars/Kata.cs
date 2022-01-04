@@ -11,8 +11,6 @@ namespace CodeWars
         {
             var result = string.Empty;
 
-            var duplicateChars = new Dictionary<char, Dictionary<string, int>> { };
-
             var q = GetChars(s1, 1)
                 .Concat(GetChars(s2, 2))
                 .GroupBy(
@@ -28,41 +26,28 @@ namespace CodeWars
                     {
                         Key = key,
                         Values = values,
-                        Rank = GetRank(values)
+                        Prefix = GetPrefix(values)
                     }
                 )
                 .OrderByDescending(_ => _.Values.Max(__ => __.Item3))
-                .ThenBy(_ => _.Rank)
+                .ThenBy(_ => _.Prefix == "=" ? "999" : _.Prefix)
                 .ThenBy(_ => _.Key)
                 ;
 
             foreach(var x in qq)
             {
-                var g = x.Values.OrderByDescending(_ => _.Item3);
-
-                var first = g.First();
-                var last = g.Last();
-
                 if (result != string.Empty)
                 {
                     result += "/";
                 }
 
-                if(x.Values.Count() == 2 && first.Item3 == last.Item3)
-                {
-                    result += "=:" + new string(first.Item1, first.Item3);                    
-                }
-                else
-                {
-                    result += first.Item2 + ":" + new string(first.Item1, first.Item3);
-                }                
+                result += x.Prefix + ":" + new string(x.Key, x.Values.Max(_ => _.Item3));
             }
-
 
             return result;
         }
 
-        private static int GetRank(IEnumerable<Tuple<char, int, int>> items)
+        private static string GetPrefix(IEnumerable<Tuple<char, int, int>> items)
         {
             var g = items.OrderByDescending(_ => _.Item3);
 
@@ -71,11 +56,11 @@ namespace CodeWars
             
             if(items.Count() == 2 && first.Item3 == last.Item3)
             {
-                return 99;
+                return "=";
             }
             else
             {
-                return first.Item2;
+                return first.Item2.ToString();
             }
         }
 
@@ -86,30 +71,6 @@ namespace CodeWars
                 .Where(c => char.IsLetter(c) && char.IsLower(c))
                 .Select(c => new Tuple<char, int>(c, order))
                 .ToList();
-
-            return result;
-        }
-
-        public static Dictionary<char, int> GetDuplicateCharCounts(string str)
-        {
-            var result = new Dictionary<char, int> { };
-
-            foreach(var c in str.ToList())
-            {
-                if(!char.IsLower(c) && !char.IsLetter(c))
-                {
-                    continue;
-                }
-
-                if(result.ContainsKey(c))
-                {
-                    result[c] += 1;
-                }
-                else
-                {
-                    result.Add(c, 1);
-                }
-            }
 
             return result;
         }
