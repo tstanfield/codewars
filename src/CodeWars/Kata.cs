@@ -5,18 +5,11 @@ using System.Text;
 
 namespace CodeWars
 {
-    public class Kata
+    public static class Kata
     {
-        public static long FindNextSquare(long num)
+        public static (string type, string[] ranks) Hand(string[] holeCards, string[] communityCards)
         {
-            double sqrt = Math.Sqrt(num);
-
-            if (sqrt % 1 > 0)
-            {
-                return -1;
-            }
-
-            return (long)Math.Pow(sqrt + 1, 2);
+            return ("nothing", new[] { "A", "Q", "9", "6", "3" });
         }
     }
 }
